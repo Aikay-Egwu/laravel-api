@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -77,6 +78,12 @@ class ProductController extends Controller
      */
     public function search($name)
     {
-        return Product::where('name', 'like', '%'.$name.'%');
+        $results = Product::where('name', 'like', '%'.$name.'%')
+            ->get();
+        return response([
+            'results' => $results,
+        ],
+            200
+        );
     }
 }

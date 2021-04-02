@@ -27,14 +27,14 @@ Route::resource('products', ProductController::class);
 
 Route::get('/product/search/{name}', [ProductController::class, 'search']);
 Route::get('/products', [ProductController::class, 'index']);
-Route::get('/products/{name}', [ProductController::class, 'show']);
+Route::get('/product/{name}', [ProductController::class, 'show']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 //Route::post('')
 //protected routes
 Route::group(['middleware'=>['auth:sanctum']], function () {
-    Route::post('/products', [ProductController::class, 'store']);
+    Route::post('/product', [ProductController::class, 'store']);
     Route::put('/products', [ProductController::class, 'update']);
-    Route::delete('/products', [ProductController::class, 'destroy']);
+    Route::delete('/product/{id}', [ProductController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
 });

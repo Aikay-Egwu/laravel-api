@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +15,7 @@ class AuthController extends Controller
         $fields = $request->validate(
             [
                 'name' => 'required|string',
-                'email' => 'required|string|unique:users, email',
+                'email' => 'required|string|unique:users,email',
                 'password' => 'required|string|confirmed'
             ]
         );
@@ -24,7 +25,7 @@ class AuthController extends Controller
             'email' => $fields['email'],
             'password' => Hash::make($fields['password'])
         ]);
-        $token = $user->creatToken('myapptoken')->plainTextToken;
+        $token = $user->createToken('myapptoken')->plainTextToken;
         $response = [
             'user' => $user,
             'token' => $token
@@ -59,7 +60,7 @@ class AuthController extends Controller
         }
 
 
-        $token = $user->creatToken('myapptoken')->plainTextToken;
+        $token = $user->createToken('myapptoken')->plainTextToken;
         $response = [
             'user' => $user,
             'token' => $token
